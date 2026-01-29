@@ -46,13 +46,13 @@ enum {
   A5 = 61, B5, C5, D5, E5, F5, G5, h5,
   A6 = 71, B6, C6, D6, E6, F6, G6, h6,
   A7 = 81, B7, C7, D7, E7, F7, G7, h7,
-  A8 = 91, B8, C8, D8, E8, F8, G8, h8, NO_SQ
+  A8 = 91, B8, C8, D8, E8, F8, G8, h8, NO_SQ, OFFBOARD
 };
 
 enum { FALSE, TRUE };
 
 // castling (1 2 4 8 changes each bits)
-enum { WKCA = 1, WQKA = 2, BKCA = 4, BQCA = 8 };
+enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 };
 
 // structure keeping track of match history in case of undo
 // BEFORE the move was made
@@ -116,7 +116,10 @@ extern U64 ClearMask[64];
 extern U64 PieceKeys[13][120];
 extern U64 SideKey;
 extern U64 CastleKeys[16];
-
+extern char PceChar[];
+extern char SideChar[];
+extern char RankChar[];
+extern char FileChar[];
 
 /* FUNCTIONS */
 
@@ -133,5 +136,7 @@ extern U64 GeneratePosKey(const S_BOARD *pos);
 
 // board.c
 extern void ResetBoard(S_BOARD *pos);
+extern int ParseFen(char *fen, S_BOARD *pos);
+extern void PrintBoard(const S_BOARD *pos);
 
 #endif
