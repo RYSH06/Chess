@@ -25,6 +25,8 @@ typedef unsigned long long U64; // 64 bit number because it's 8x8 board
 
 #define MAX_GAME_MOVES (2048)
 
+#define START_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 // piece declaration
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 
