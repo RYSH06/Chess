@@ -99,7 +99,8 @@ typedef struct {
 
 /* MACROS */
 #define FR2SQ(f,r) ((21 + (f)) + ((r) * 10)) // rank number to 120 array number
-#define SQ64(sq120) Sq120ToSq64[sq120]
+#define SQ64(sq120) (Sq120ToSq64[(sq120)])
+#define SQ120(sq64) (Sq64ToSq120[(sq64)])
 #define POP(b) PopBit(b)
 #define CNT(b) CountBits(b)
 #define CLRBIT(bb, sq) ((bb) &= ClearMask[(sq)])
@@ -127,5 +128,8 @@ extern int CountBits(U64 b);
 
 // hashkeys.c
 extern U64 GeneratePosKey(const S_BOARD *pos);
+
+// board.c
+extern void ResetBoard(S_BOARD *pos);
 
 #endif
