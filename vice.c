@@ -7,18 +7,28 @@ int main() {
 
   U64 playedBitBoard = 0ULL;
 
-  printf("Start:\n\n");
-  PrintBitBoard(playedBitBoard);
-
   playedBitBoard |= (1ULL << SQ64(D2));
-  printf("D2:\n\n");
+  playedBitBoard |= (1ULL << SQ64(D3));
+  playedBitBoard |= (1ULL << SQ64(D4));
+
+  printf("\n");
   PrintBitBoard(playedBitBoard);
 
-  playedBitBoard |= (1ULL << SQ64(G2));
-  printf("G2:\n\n");
+  int count = CNT(playedBitBoard);
+
+  printf("Count:%d\n", count);
+
+  int index = POP(&playedBitBoard);
+  printf("index:%d\n", index);
   PrintBitBoard(playedBitBoard);
-
-
+  count = CNT(playedBitBoard);
+  printf("Count:%d\n", count);
+  
+  int sq64 = 0;
+  while (playedBitBoard) {
+    sq64 = POP(playedBitBoard);
+    printf("popped:%d\n", sq64);
+  }
 
   return 0;
 }
