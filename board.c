@@ -3,6 +3,42 @@
 #include <stdio.h>
 #include "defs.h"
 
+void UpdateListsMaterial(S_BOARD *pos) {
+  int piece, sq, index, color;
+
+  for (index = 0; index < BRD_SQ_NUM; ++index) {
+    sq = index;
+    piece = pos->pieces[index];
+    if (piece != OFFBOARD && piece != EMPTY) {
+      if (PieceBig[piece] == TRUE) {
+        color = PieceCol[piece];
+        pos->bigPce[color]++;
+      }
+      if (PieceMin[piece] == TRUE) {
+        color = PieceCol[piece];
+        pos->minPce[color]++;
+      }
+      if (PieceMaj[piece] == TRUE) {
+        color = PieceCol[piece];
+        pos->majPce[color]++;
+      }
+      pos->material[color] += PieceVal[piece];
+
+      // piece list
+      // pList[13][10];
+      pos->pList[piece][pos->pceNum[piece]] = sq;
+      pos->pceNum[piece]++;
+
+      if (piece == wK) {
+        pos->KingSq[WHITE] = sq;
+      }
+      if (piece == bK) {
+        pos->KingSq[BLACK] = sq;
+      }
+    }
+  }
+}
+
 int ParseFen(char *fen, S_BOARD *pos) {
   ASSERT(fen != NULL);
   ASSERT(pos != NULL);
@@ -66,6 +102,8 @@ int ParseFen(char *fen, S_BOARD *pos) {
       file++;
     }
     fen++;
+
+    UpdateListsMaterial(pos);
   }
 
   ASSERT(*fen == 'w' || *fen == 'b');
