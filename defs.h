@@ -110,7 +110,7 @@ typedef struct {
 #define SETBIT(bb, sq) ((bb) |= SetMask[(sq)])
 
 #define IsBQ(p) (PieceBishopQueen[(p)])
-#define IsRQ(p) (PieceRookQeuun[(p)])
+#define IsRQ(p) (PieceRookQueen[(p)])
 #define IsKn(p) (PieceKnight[(p)])
 #define IsKi(p) (PieceKing[(p)])
 
@@ -160,5 +160,8 @@ extern int ParseFen(char *fen, S_BOARD *pos);
 extern void PrintBoard(const S_BOARD *pos);
 extern void UpdateListsMaterial(S_BOARD *pos);
 extern int CheckBoard(const S_BOARD *pos);
+
+// attack.c
+extern int SqAttacked(const int sq, const int side, const S_BOARD *pos);
 
 #endif
