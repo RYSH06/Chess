@@ -54,6 +54,11 @@ enum { FALSE, TRUE };
 // castling (1 2 4 8 changes each bits)
 enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 };
 
+typedef struct {
+  int move;
+  int score;
+} S_MOVE;
+
 // structure keeping track of match history in case of undo
 // BEFORE the move was made
 typedef struct {
@@ -99,6 +104,18 @@ typedef struct {
   int pList[13][10]; // first index is piece type, second is number of that piece
 
 } S_BOARD;
+
+/* GAME MOVES */
+// Hexadecimal, 0-9, A-F
+#define FROM(m) ((m) & 0x3F)
+#define TOSQ(m) ((m >> 7) & 0x3F)
+#define CAPTURED(m) ((m >> 14) & 0xF)
+#define PROMOTED(m) ((m >> 20) & 0xF)
+#define MFLAGEP 0x40000
+#define MFLAGPS 0x80000
+#define MFLAGCA 0x1000000
+#define MFLAGCAP 0x7C000
+#define MFLAGPROM 0xF00000
 
 /* MACROS */
 #define FR2SQ(f,r) ((21 + (f)) + ((r) * 10)) // rank number to 120 array number
